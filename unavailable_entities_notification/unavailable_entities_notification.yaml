@@ -2,7 +2,7 @@ blueprint:
   name: Unavailable entity detection & notification
   description:  Regularly test all entities' status to check for unavailability.
   domain: automation
-  source_url: https://github.com/gmlupatelli/blueprints_repo/blob/master/unavailable_entities_notification/unavailable_entities_notification.yaml
+  source_url: https://github.com/mmichon/blueprints_repo/blob/master/unavailable_entities_notification/unavailable_entities_notification.yaml
 
   # Blueprint Inputs
   input:
@@ -89,11 +89,11 @@ variables:
     {% for state in states %}
       {% if exclude.entity_id is defined %}
         {% if state.state == 'unavailable' and not state.entity_id in exclude.entity_id %}
-          {% set result.entities = result.entities + [state.name] %}
+          {% set result.entities = result.entities + [state.entity_id] %}
         {% endif %}
       {% else %}
         {% if state.state == 'unavailable' %}
-          {% set result.entities = result.entities + [state.name] %}
+          {% set result.entities = result.entities + [state.entity_id] %}
         {% endif %}
       {% endif %}
     {% endfor %}
